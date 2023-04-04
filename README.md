@@ -57,6 +57,25 @@ For simplicity, we select the top 10 programming languages and show their word c
 
 The word cloud visualizations show the most frequent words in the summary of each programming language. The most common words, including the name and key features, provide insight into the defining characteristics of each language.
 
+
+**Distribution of Different Programming Languages in a Range of Years or a Particular Year**
+
+To explore when different programming languages occur, we create a bar chart for the years up to 1950 (excluding 1950) and a line chart for the years from 1950 onwards (including 1950).
+
+![bar_and_line](./image/bar_and_line.png)
+
+From the figure, we can observe that the majority of programming languages emerged after 1950. Overall, there is an upward trend in the number of programming languages appearing per year. Interestingly, some programming languages have their origins far in the past, even dating back to ancient times (even before the Common Era, BC!). For instance, The Sumerian abacus appeared between 2700 and 2300 BC. It held a table of successive columns which delimited the successive orders of magnitude of their sexagesimal (base 60) number system.[1]
+
+[1] Ifrah, Georges (2001). The Universal History of Computing: From the Abacus to the Quantum Computer. New York, NY: John Wiley & Sons, Inc. ISBN 978-0-471-39671-0.
+
+**Distribution of Different Programming Languages in different countries**
+
+To investigate the geographical distribution of programming languages, we aim to display the number of programming languages originating in various countries on a map. To accomplish this, we may need to standardize country names in the raw data, as they are currently represented in an informal manner. For example, both "USA" and "United State" refer to the "United States". Additionally, a programming language may be developed collaboratively by multiple countries. Therefore, we allocate a fraction, calculated as (1/the total number of countries contributing to its development), to each participating country.
+
+![bar_and_line](./image/global_map.png)
+
+As illustrated in the graph, the United States is responsible for the development of the majority of programming languages. Encouragingly, numerous countries across the globe have taken part in creating programming languages, making valuable contributions to the world.
+
 ### Related work
 
 
