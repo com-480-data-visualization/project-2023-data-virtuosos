@@ -3,7 +3,7 @@
 | Student's name | SCIPER |
 | -------------- | ------ |
 |Feng Yiyang |352042 |
-| | |
+|Zhou Naisong |353331 |
 |Tang Xuehan |353567 |
 
 [Milestone 1](#milestone-1) • [Milestone 2](#milestone-2) • [Milestone 3](#milestone-3)
@@ -19,15 +19,20 @@ Please, fill the following sections about your project.
 
 ### Dataset
 
-> Find a dataset (or multiple) that you will explore. Assess the quality of the data it contains and how much preprocessing / data-cleaning it will require before tackling visualization. We recommend using a standard dataset as this course is not about scraping nor data processing.
->
-> Hint: some good pointers for finding quality publicly available datasets ([Google dataset search](https://datasetsearch.research.google.com/), [Kaggle](https://www.kaggle.com/datasets), [OpenSwissData](https://opendata.swiss/en/), [SNAP](https://snap.stanford.edu/data/) and [FiveThirtyEight](https://data.fivethirtyeight.com/)), you could use also the DataSets proposed by the ENAC (see the Announcements section on Zulip).
+In our data visualization project, we have chosen to utilize the [Programming Language Dataset (PLDB)](https://pldb.com/), which encompasses a comprehensive collection of 331 attributes for 4,304 distinct programming languages. The dataset primarily comprises fields such as title, country, type, rank, users, creators, and statistics pertaining to platforms like GitHub, Wikipedia, and Stack Overflow.
+
+Upon conducting an in-depth exploratory data analysis, we have determined that the dataset boasts exceptional quality, characterized by a diverse range of both numerical and textual features. To effectively process text analysis tasks, we filter out symbols and extraneous non-textual notations. Moreover, data cleaning procedures like removing null values and formalizing data are conducted, ensuring the accuracy and reliability of our project outcomes.
 
 ### Problematic
 
-> Frame the general topic of your visualization and the main axis that you want to develop.
-> - What am I trying to show with my visualization?
-> - Think of an overview for the project, your motivation, and the target audience.
+Our data visualization project aims to elucidate the distribution characteristics and interrelationships of various programming languages. To effectively convey these insights, we have devised four primary visualization components:
+
+- Temporal distribution: A timeline showcasing the emergence of programming languages over a specified range of years.
+- Geographical distribution: An interactive map highlighting the global distribution of programming languages.
+- Word cloud: A graphical representation of the frequency and prominence of terms associated with different programming languages.
+- Network visualization: A diagram illustrating the connections and associations between various programming languages.
+
+Our data visualization project aims to present an engaging and intuitive view of the programming languages landscape, highlighting their temporal and geographical distributions, relevant terminology, and interconnections. Driven by a desire to enrich understanding and appreciation for the field's progression, we aim to engage programming language developers, software engineers, computer science students, educators, and technology enthusiasts in exploring the world of programming languages and their diverse impact.
 
 ### Exploratory Data Analysis
 
@@ -78,11 +83,9 @@ As illustrated in the graph, the United States is responsible for the developmen
 
 ### Related work
 
+We discovered the dataset on [kaggle](https://www.kaggle.com/datasets/sujaykapadnis/programming-language-database) which was updated for data analysis and visualization purposes, while the original dataset repository can be found [here](https://github.com/breck7/pldb). As of now, no existing applications of this dataset have been identified. 
 
-> - What others have already done with the data?
-> - Why is your approach original?
-> - What source of inspiration do you take? Visualizations that you found on other websites or magazines (might be unrelated to your data).
-> - In case you are using a dataset that you have already explored in another context (ML or ADA course, semester project...), you are required to share the report of that work to outline the differences with the submission for this class.
+Our primary inspiration for this project stems from our personal experiences, as well as the compelling data visualization stories presented during lectures. This is our first time utilizing this specific dataset.
 
 ## Milestone 2 (7th May, 5pm)
 
