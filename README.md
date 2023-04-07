@@ -28,7 +28,7 @@ Upon conducting an in-depth exploratory data analysis, we have determined that t
 Our data visualization project aims to elucidate the distribution characteristics and interrelationships of various programming languages. To effectively convey these insights, we have devised four primary visualization components:
 
 - Temporal distribution: A timeline showcasing the emergence of programming languages over a specified range of years.
-- Geographical distribution: An interactive map highlighting the global distribution of programming languages.
+- Geographical distribution: A map highlighting the global distribution of programming languages.
 - Word cloud: A graphical representation of the frequency and prominence of terms associated with different programming languages.
 - Network visualization: A diagram illustrating the connections and associations between various programming languages.
 
@@ -38,11 +38,13 @@ Our data visualization project aims to present an engaging and intuitive view of
 
 **Preprocessing**:
 
-We processed the dataset in `milestone_p1.ipynb`. We obtained the data from the PLDB database. The dataset contains information such as the programming language name, year of appearance, type, rank, fact count, last activity, example count, book count, and more. Before constructing the network, we first clean the data and prepare it for analysis. We also cleaned the Wikipedia summary text by removing stopwords, numbers, and punctuation.
+We processed the dataset in [milestone_p1.ipynb](milestone_p1.ipynb). We obtained the data from the PLDB database. The dataset contains information such as the programming language name, year of appearance, type, rank, fact count, last activity, example count, book count, and more. Before constructing the network, we first cleaned the data and prepare it for analysis. 
+
+In detail, we cleaned the text column `wikipedia.summary` by removing stopwords, numbers, and punctuation. Also, we may need to standardize the column `country`, as they were represented in an informal manner in raw data. For example, both "USA" and "United State" refer to the "United States". Therefore, we replaced some confusing names so that the countries' names can be accepted by the function [pycountry.countries.get](https://pypi.org/project/pycountry/), which can retrieve uniform information about a country.
 
 **Distribution of Different Programming Languages in a Range of Years or a Particular Year**
 
-To explore when different programming languages occur, we create a bar chart for the years up to 1950 (excluding 1950) and a line chart for the years from 1950 onwards (including 1950).
+To explore when different programming languages occur, we created a bar chart for the years up to 1950 (excluding 1950) and a line chart for the years from 1950 onwards (including 1950).
 
 ![bar_and_line](./image/bar_and_line.png)
 
@@ -52,7 +54,7 @@ From the figure, we can observe that the majority of programming languages emerg
 
 **Distribution of Different Programming Languages in different countries**
 
-To investigate the geographical distribution of programming languages, we aim to display the number of programming languages originating in various countries on a map. To accomplish this, we may need to standardize country names in the raw data, as they are currently represented in an informal manner. For example, both "USA" and "United State" refer to the "United States". Additionally, a programming language may be developed collaboratively by multiple countries. Therefore, we allocate a fraction, calculated as (1/the total number of countries contributing to its development), to each participating country.
+To investigate the geographical distribution of programming languages, we aimed to display the number of programming languages originating in various countries on a map. To accomplish this, data cleaning described before was applied to standardize country names. Additionally, a programming language may be developed collaboratively by multiple countries. Therefore, we allocate a fraction, calculated as (1/the total number of countries contributing to its development), to each participating country.
 
 ![bar_and_line](./image/global_map.png)
 
@@ -60,7 +62,7 @@ As illustrated in the graph, the United States is responsible for the developmen
 
 **Word Cloud for each programming language**:
 
-For simplicity, we select the top 10 programming languages and show their word clouds.
+For simplicity, we selected the top 10 programming languages and show their word clouds.
 
 ![wordcloud](./image/wordcloud.png)
 
@@ -68,7 +70,7 @@ The word cloud visualizations show the most frequent words in the summary of eac
 
 **Network indicating relations between different programming languages**:
 
-To construct the network, we first treated programming languages with the same type as similar languages. We then added an edge between two languages if they share the same type. Before constructing the network, we first take a look at the distribution of types. We found that there are several different types of programming languages in the dataset, including general-purpose, web, and database. To visualize the distribution of different types, we created a simple bar plot that shows the number of programming languages for each type, in descending order.
+To construct the network, we first treated programming languages with the same type as similar languages. We then added an edge between two languages if they share the same type. Before constructing the network, we first took a look at the distribution of types. We found that there were several different types of programming languages in the dataset, including general-purpose, web, and database. To visualize the distribution of different types, we created a simple bar plot that shows the number of programming languages for each type, in descending order.
 
 ![Type Distribution](./image/type_distribution.png)
 
