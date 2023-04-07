@@ -59,7 +59,7 @@ In detail, we cleaned the text column `wikipedia.summary` by removing stopwords,
 
 **Distribution of Different Programming Languages in a Range of Years or a Particular Year**
 
-To explore when different programming languages occur, we created a bar chart for the years up to 1950 (excluding 1950) and a line chart for the years from 1950 onwards (including 1950).
+To explore when different programming languages occur, we utilized the column `appeared` and created a bar chart for the years up to 1950 (excluding 1950) and a line chart for the years from 1950 onwards (including 1950).
 
 ![bar_and_line](./image/bar_and_line.png)
 
@@ -69,7 +69,7 @@ From the figure, we can observe that the majority of programming languages emerg
 
 **Distribution of Different Programming Languages in different countries**
 
-To investigate the geographical distribution of programming languages, we aimed to display the number of programming languages originating in various countries on a map. To accomplish this, data cleaning described before was applied to standardize country names. Additionally, a programming language may be developed collaboratively by multiple countries. Therefore, we allocate a fraction, calculated as (1/the total number of countries contributing to its development), to each participating country.
+To investigate the geographical distribution of programming languages, we aimed to display the number of programming languages originating in various countries on a map. To accomplish this, data cleaning described before was applied to standardize the column `country`. Additionally, a programming language may be developed collaboratively by multiple countries. Therefore, we allocate a fraction, calculated as (1/the total number of countries contributing to its development), to each participating country.
 
 ![bar_and_line](./image/global_map.png)
 
@@ -77,7 +77,7 @@ As illustrated in the graph, the United States is responsible for the developmen
 
 **Word Cloud for each programming language**:
 
-For simplicity, we selected the top 10 programming languages and show their word clouds.
+For simplicity, we selected the top 10 programming languages and show their word clouds of `wikipedia.summary`.
 
 ![wordcloud](./image/wordcloud.png)
 
