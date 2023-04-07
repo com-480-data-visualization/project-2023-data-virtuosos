@@ -21,6 +21,14 @@ Please, fill the following sections about your project.
 
 In our data visualization project, we have chosen to utilize the [Programming Language Dataset (PLDB)](https://pldb.com/), which encompasses a comprehensive collection of 331 attributes for 4,304 distinct programming languages. The dataset primarily comprises fields such as title, country, type, rank, users, creators, and statistics pertaining to platforms like GitHub, Wikipedia, and Stack Overflow.
 
+Here are the columns and their descriptions that we are interested in:
+
+| Column Name | Description |
+| -------------- | ------ |
+|title |The name of the programming language |
+|appeared |When the languague was developed |
+|rank |The ranking algorithm is explained in the [dataset website](https://pldb.com/pages/the-rankings-algorithm.html). The PLDB rankings algorithm is: PLDBRank(Entity) = sortDesc(sumOfBest3(NumberOfEstimatedJobsRank, NumberOfEstimatedUsersRank, NumberOfFactsInPLDBRank, NumberOfInboundLinksInPLDBRank))|
+
 Upon conducting an in-depth exploratory data analysis, we have determined that the dataset boasts exceptional quality, characterized by a diverse range of both numerical and textual features. To effectively process text analysis tasks, we filter out symbols and extraneous non-textual notations. Moreover, data cleaning procedures like removing null values and formalizing data are conducted, ensuring the accuracy and reliability of our project outcomes.
 
 ### Problematic
