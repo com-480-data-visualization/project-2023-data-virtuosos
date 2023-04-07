@@ -27,7 +27,12 @@ Here are the columns and their descriptions that we are interested in:
 | -------------- | ------ |
 |title |The name of the programming language |
 |appeared |When the languague was developed |
+|type |The type of language (like programming language, queryLanguage or dataNotation) |
 |rank |The ranking algorithm is explained in the [dataset website](https://pldb.com/pages/the-rankings-algorithm.html). The PLDB rankings algorithm is: PLDBRank(Entity) = sortDesc(sumOfBest3(NumberOfEstimatedJobsRank, NumberOfEstimatedUsersRank, NumberOfFactsInPLDBRank, NumberOfInboundLinksInPLDBRank))|
+|country |By which country was the programming language developed |
+|wikipedia.summary | Summary of each programming language on Wikipedia |
+
+|country | |
 
 Upon conducting an in-depth exploratory data analysis, we have determined that the dataset boasts exceptional quality, characterized by a diverse range of both numerical and textual features. To effectively process text analysis tasks, we filter out symbols and extraneous non-textual notations. Moreover, data cleaning procedures like removing null values and formalizing data are conducted, ensuring the accuracy and reliability of our project outcomes.
 
