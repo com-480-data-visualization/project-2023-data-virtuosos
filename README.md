@@ -76,7 +76,7 @@ To construct the network, we first treated programming languages with the same t
 
 From above, we could see the type has a skewed distribution. Most languages have the type "pl". So if we use simply use `type` as the similarity metric, we could see several separated cliques with a large cluster in the middle (pl language).
 
-Then we create the network. For simplicity, we just show the top 100 programming languages.
+Then we created the network. For simplicity, we just showed the top 100 programming languages.
 
 ![network](./image/network.png)
 
