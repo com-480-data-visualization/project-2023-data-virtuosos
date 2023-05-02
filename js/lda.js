@@ -23,37 +23,53 @@ $(document).ready(function () {
 
             // Set the selected option text as the first option
             $("#language-select").val(languages[0].title);
-        }      
+        }
+        
+        // Limit the number of times the displayLDAVis function is called within a certain time interval
+        function debounce(func, wait) {
+            let timeout;
+          
+            return function () {
+                const context = this;
+                const args = arguments;
+            
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    func.apply(context, args);
+                }, wait);
+            };
+        }
   
         // Display the LDA visualization for the selected language
         function displayLDAVis(language) {
-            d3.json(`data/lda/${language}.json`, function (ldaData) {
+            return new Promise((resolve) => {
                 // Clear the previous visualization
                 $("#lda-vis").empty();
-        
+            
                 // Create a new div for the visualization and assign an ID
                 const visDiv = $("<div>").attr("id", "lda-vis-content").appendTo("#lda-vis");
-        
+            
                 // Display the LDA visualization using LDAvis
                 if (language == "C#") {
                     language = "C_sharp";
                 }
                 new LDAvis("#" + visDiv.attr("id"), `data/lda/${language}.json`);
+                resolve();
             });
-        }          
+        }                    
   
         // Update the UI when the year is changed
-        $("#year-slider").on("input", function () {
+        $("#year-slider").on("input", debounce(function () {
             currentYear = $(this).val();
             $("#year-display").text(currentYear);
             const languages = filterLanguages(currentYear);
             updateLanguageSelect(languages);
             displayLDAVis(languages[0].title);
-        });
+        }, 200));
   
         // Update the UI when the language is changed
-        $("#language-select").on("change", function () {
-            displayLDAVis($(this).val());
+        $("#language-select").on("change", async function () {
+            await displayLDAVis($(this).val());
         });
   
         // Initialize the UI
