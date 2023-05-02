@@ -27,8 +27,11 @@
 <link href="flexslider/flexslider.css" rel="stylesheet" />
 <link href="js/owl-carousel/owl.carousel.css" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css" />
-<!-- Font Awesome -->
 <link href="font/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/ldavis.js"></script>
+<link rel="stylesheet" type="text/css" href="css/lda.css">
+<script src="js/lda.js"></script>
 </head>
 
 <body>
@@ -276,40 +279,36 @@
 </section>
 
 
-<section id="services" class="page-section colord">
-  <div class="container">
-    <div class="row"> 
-      <!-- item -->
-      <div class="col-md-3 text-center"><div class="b1"> <i class="circle"><img src="images/a1.jpg" alt="" /></i>
-        <h3>Bootstrap</h3>
-        <p>Nullam ac rhoncus sapien, non gravida purus. Alinon elit imperdiet congue. Integer elit imperdiet congue.</p>
-      </div></div>
-      <!-- end: --> 
-      
-      <!-- item -->
-      <div class="col-md-3 text-center"><div class="b1"><i class="circle"> <img src="images/a2.jpg" alt="" /></i>
-        <h3>Designing</h3>
-        <p>Nullam ac rhoncus sapien, non gravida purus. Alinon elit imperdiet congue. Integer elit imperdiet congue.</p>
-      </div></div>
-      <!-- end: --> 
-      
-      <!-- item -->
-      <div class="col-md-3 text-center"><div class="b1"><i class="circle"> <img src="images/a3.jpg" alt="" /></i>
-        <h3>Development</h3>
-        <p>Nullam ac rhoncus sapien, non gravida purus. Alinon elit imperdiet congue. Integer ultricies sed elit impe.</p>
-      </div></div>
-      <!-- end: --> 
-      
-      <!-- item -->
-      <div class="col-md-3 text-center"><div class="b1"><i class="circle"> <img src="images/a4.jpg" alt="" /></i>
-        <h3>Mobile</h3>
-        <p>Nullam ac rhoncus sapien, non gravida purus. Alinon elit imperdiet congue. Integer elit imperdiet conempus.</p>
-      </div></div>
-      <!-- end:--> 
+<section id="lda" class="page-section colord">
+    <script src="js/d3.v3.js"></script>
+    <div class="container">
+        <div class="heading text-center"> 
+            <h2>LDA Visualization</h2>
+            <p>
+                Filter programming languages before selected year with left slider.<br>
+                Choose language in right selection box.<br>
+                Visualize keywords with LDA topic and relevance metric.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="year-slider">Select Year:</label>
+                <input type="range" min="1950" max="2022" value="2022" class="slider" id="year-slider">
+                <p>Year: <span id="year-display"></span></p>
+            </div>
+            <div class="col-md-6">
+                <label for="language-select">Select Programming Language:</label>
+                <select id="language-select" class="custom-select"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <div id="lda-vis"></div>
+        </div>
+      </div>
     </div>
-  </div>
-  <!--/.container--> 
 </section>
+  
 <section id="aboutUs">
   <div class="container">
     <div class="heading text-center"> 
