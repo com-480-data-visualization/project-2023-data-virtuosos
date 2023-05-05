@@ -191,6 +191,65 @@
 
         svg.call(tip);
 
+        // Add legend
+        function createLegend(svg, color) {
+          // Define the gradient
+          var gradientId = "legendGradient";
+          var gradient = svg.append("defs")
+            .append("linearGradient")
+            .attr("id", gradientId)
+            .attr("x1", "0%")
+            .attr("y1", "100%")
+            .attr("x2", "0%")
+            .attr("y2", "0%");
+
+          var stops = color.domain().map(function (d, i) {
+            return {
+              offset: 100 * i / (color.domain().length - 1) + "%",
+              color: color(d)
+            };
+          });
+
+          gradient.selectAll("stop")
+            .data(stops)
+            .enter()
+            .append("stop")
+            .attr("offset", function (d) { return d.offset; })
+            .attr("stop-color", function (d) { return d.color; });
+
+          // Add a group for the legend
+          var legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(" + (width *0.92) + "," + (height*0.35) + ")");
+
+          // Create a rectangle with the gradient
+          legend.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 20)
+            .attr("height", 200)
+            .style("fill", "url(#" + gradientId + ")");
+
+          // Add labels for the color thresholds
+          var legendLabels = color.domain().reverse().map(function (d, i) {
+            return {
+              x: 30,
+              y: i * 200 / (color.domain().length - 1),
+              text: d
+            };
+          });
+
+          legend.selectAll("text")
+            .data(legendLabels)
+            .enter()
+            .append("text")
+            .attr("x", function (d) { return d.x; })
+            .attr("y", function (d) { return d.y; })
+            .text(function (d) { return d.text; });
+        }
+
+
+      createLegend(svg, color);
 
         queue()
           .defer(d3.json, "world_countries.json")
