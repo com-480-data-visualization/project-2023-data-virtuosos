@@ -252,8 +252,8 @@
       createLegend(svg, color);
 
         queue()
-          .defer(d3.json, "world_countries.json")
-          .defer(d3.json, "world_count.json")
+          .defer(d3.json, "./data/world_countries.json")
+          .defer(d3.json, "./data/world_count.json")
           .await(ready);
 
         function ready(error, data, population) {
@@ -631,7 +631,7 @@
       document.addEventListener('DOMContentLoaded', loadData);
       async function loadData() {
         // Replace with the path to your JSON file or API endpoint
-        const url = 'details_data.json';
+        const url = './data/details_data.json';
 
         try {
           const response = await fetch(url);
