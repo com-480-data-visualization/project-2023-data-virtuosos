@@ -31,6 +31,8 @@
   <link href="font/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="js/ldavis.js"></script>
+  <script src="js/queue.v1.min.js"></script>
+  <script src="js/topojson.v1.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/lda.css">
   <script src="js/lda.js"></script>
 </head>
@@ -49,9 +51,11 @@
         <div id="main-nav" class="collapse navbar-collapse">
           <ul class="nav navbar-nav" id="mainNav">
             <li class="active" id="firstLink"><a href="#home" class="scroll-link">Home</a></li>
+            <li><a href="#PlCloud" class="scroll-link">Language Cloud</a></li>
             <li><a href="#globalmap" class="scroll-link">Distribution Across Countries</a></li>
             <li><a href="#lda" class="scroll-link">LDAvis</a></li>
             <li><a href="#network" class="scroll-link">Network</a></li>
+            <li><a href="#hidden-table" class="scroll-link">Table of Details</a></li>
             
           </ul>
         </div>
@@ -83,6 +87,168 @@
 
   </section>
 
+  <section id="PlCloud">
+    
+
+    <div class="heading text-center">
+      <!-- Heading -->
+      <h2>Programming Languages Cloud</h2>
+      <p>
+        Effortlessly hover over each programming language to uncover additional information, and click on a particular language to swiftly navigate to its comprehensive details in the table!
+      </p>
+    </div>  
+
+    <div class="text-center ">
+
+      <ul>
+        <li><a href="#" onclick="toChangeBatch()">Change a Batch </a></li>
+      </ul>
+      <div class="content">
+        <!-- content -->
+      </div>
+    </div>
+    <script type="text/javascript" src="./js/TagCloud.min.js"></script>
+
+    <script>
+      let jsonDetailData;
+      class SeededRandom {
+        constructor(seed) {
+          this.seed = seed % 2147483647;
+          if (this.seed <= 0) {
+            this.seed += 2147483646;
+          }
+        }
+
+        next() {
+          return this.seed = this.seed * 16807 % 2147483647;
+        }
+
+        nextFloat() {
+          return (this.next() - 1) / 2147483646;
+        }
+      }
+      function getRandomInt(min, max, seed) {
+        const randomGenerator = new SeededRandom(seed);
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      fetch("./data/details_data.json")
+      .then(response => response.json())
+      .then(data => {
+        jsonDetailData = data;
+        const numberOfItemsToPick = 30;
+        const selectedTitles = [];
+
+        // Ensure there are at least 100 items in the data
+        if (jsonDetailData.length < numberOfItemsToPick) {
+          console.error('Not enough items in the data to pick 100 random items');
+          return;
+        }
+
+        while (selectedTitles.length < numberOfItemsToPick) {
+          // Get a random index within the data array
+          const randomIndex = getRandomInt(0, jsonDetailData.length - 1);
+          const title = jsonDetailData[randomIndex].title;
+
+          // Check if the title is not already in the selectedTitles array
+          if (!selectedTitles.includes(title)) {
+            selectedTitles.push(title);
+          }
+        }
+
+        ready_for_pl_cloud(selectedTitles)}
+        )
+      .catch(error => console.error('Error fetching JSON file:', error));
+      
+      let tc;
+      function ready_for_pl_cloud(selectedTitles) {
+        
+        tc = TagCloud('.content', selectedTitles);
+        //console.log(tc);
+      }
+      
+      
+      function displayContentMouseOver(content) {
+        
+          //tipPLCloud.show(content);
+          console.log(content); 
+      }
+    </script>
+    <script>
+        // switch style
+        function toDefault() { document.body.classList.remove('light'); }
+        function toLight() { document.body.classList.add('light'); }
+        // add / remove tag
+        function addTag() {
+            if (!tc) return;
+            texts.push('New');
+            tc.update(texts);
+        }
+        function removeTag() {
+            if (!tc) return;
+            texts.pop();
+            tc.update(texts);
+        }
+        var otherTcs = [];
+        // create and destroy tagcloud
+        function toCreate() {
+            if (otherTcs.length >= 3) return;
+            otherTcs.push(TagCloud('.content', texts));
+        }
+        function toDestroy() {
+            var last = otherTcs[otherTcs.length - 1];
+            if (!last) return;
+            last.destroy();
+            otherTcs.pop();
+        }
+        function toChangeBatch() {
+            if (!tc) return;
+            const numberOfItemsToPick = 30;
+            const selectedTitles = [];
+
+            // Ensure there are at least 100 items in the data
+            if (jsonDetailData.length < numberOfItemsToPick) {
+              console.error('Not enough items in the data to pick 100 random items');
+              return;
+            }
+
+            while (selectedTitles.length < numberOfItemsToPick) {
+              // Get a random index within the data array
+              const randomIndex = getRandomInt(0, jsonDetailData.length - 1);
+              const title = jsonDetailData[randomIndex].title;
+
+              // Check if the title is not already in the selectedTitles array
+              if (!selectedTitles.includes(title)) {
+                selectedTitles.push(title);
+              }
+            }
+
+            tc.update(selectedTitles);
+        }
+        
+        
+  
+        // add and remove clickEvent
+        function clickEventHandler(e) {
+            if (e.target.className === 'tagcloud--item') {
+                window.open(`https://www.google.com/search?q=${e.target.innerText}`, '_blank');
+            }
+        }
+        function addClickEvent() {
+            var rootEl = document.querySelector('.content');
+            rootEl.addEventListener('click', clickEventHandler);
+        }
+        function removeClickEvent() {
+            var rootEl = document.querySelector('.content');
+            rootEl.removeEventListener('click', clickEventHandler);
+        }
+    </script>
+  </div>
+  </section>
+
+  <div class="separator-line"></div>
+
   <section id="globalmap">
     <div class="heading text-center">
       <!-- Heading -->
@@ -98,13 +264,13 @@
 
 
       <script src="js/d3.v4.min.js"></script>
-      <script src="js/queue.v1.min.js"></script>
-      <script src="js/topojson.v1.min.js"></script>
       <script src="d3-tip.js"></script>
+      
       <script>
         var format = d3.format(",");
 
         // Set tooltips
+        
         var tip = d3.tip()
           .attr('class', 'd3-tip')
           .offset([-10, 0])
@@ -268,11 +434,11 @@
           });
           //console.log("sudanfor",populationById["SSD"])
           data.features.forEach(function (d) {
-            console.log("dname1", d.properties, d.id)
+            //console.log("dname1", d.properties, d.id)
             d.population = populationById[d.id];
             d.Pls = topPlsById[d.id]
-            console.log("dname", d.properties)
-            console.log("dnamepopu", d.population)
+            //console.log("dname", d.properties)
+            //console.log("dnamepopu", d.population)
           });
 
           svg.append("g")
@@ -339,7 +505,7 @@
     </div>
 
   </section>
-
+  <div class="separator-line"></div>
 
   <section id="lda" class="page-section colord">
     <script src="js/d3.v3.js"></script>
@@ -371,7 +537,7 @@
     </div>
   </section>
 
-
+  <div class="separator-line"></div>
 
   <section id="network">
     <div class="heading text-center">
@@ -604,16 +770,25 @@
 
 
 
-
+  <div class="separator-line"></div>
 
   <!--/.page-section-->
 
 
-  <div class="heading text-center">
-    <button id="toggle-section">Show Details of the Programming Languages</button>
-  </div>
+ 
 
+  
+ 
   <section id="hidden-table">
+    <div class="heading text-center">
+      <h2>Table of Details</h2>
+      <p>
+        
+      </p>
+    </div>
+    <div class="heading text-center">
+      <button id="toggle-section">Show Details of the Programming Languages</button>
+    </div>
     <table id="languages">
       <tr>
         <th>Title</th>

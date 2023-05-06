@@ -1873,3 +1873,71 @@ nav#filter li {
     -moz-appearance: none;
     appearance: none;
 }  
+
+/* White line separator*/
+.separator-line {
+	width: 80%;
+	height: 2px; /* Adjust the height to control the thickness of the white line */
+	background-color: rgb(159, 196, 248);
+	margin: 0 auto; /* Center the line horizontally */
+  }
+  
+
+/* Style the for Programming Lnaguage Cloud*/
+
+.light {
+	background: #666;
+	color: #fff;
+}
+
+.content .tagcloud {
+	width: 80%;
+	height: 80%;
+	display: inline-block;
+	margin: 20px;
+	
+}
+
+ul {
+	display: inline-block;
+}
+
+a_PLcloud {
+	color: #0366d6;
+	text-decoration: none;
+}
+
+a_PLcloud:hover {
+	text-decoration: underline;
+}
+
+.tagcloud {
+	font-size: 16px;
+}
+
+.tagcloud--item {
+	padding: 2px 4px;
+	background-color: transparent;
+	border: 1px solid transparent;
+	cursor: pointer;
+	color: red
+}
+
+.tagcloud--item:hover {
+	background-color: rgba(0, 0, 0, .1);
+	border: 1px solid #333;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	opacity: 1 !important;
+	z-index: 100 !important;
+}
+
+.light .tagcloud--item {
+	color: #fff;
+}
+
+.light .tagcloud--item:hover {
+	background-color: rgba(255, 255, 255, .1);
+	border: 1px solid #fff;
+}
