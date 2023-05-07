@@ -98,19 +98,23 @@
       </p>
     </div>  
 
-    <div class="heading text-center ">
+    <div class="heading text-center">
 
-      <ul>
-        <li><a href="#" onclick="toChangeBatch()">Change a Batch </a></li>
+      <ul class="FontSize20">
+        <li ><a onclick="toChangeBatch()" >Change a Batch: Explore another 30 programming languages </a></li>
       </ul>
       <div class="content">
         <!-- content -->
+      </div>
+      <div id="content-display" class="PlCloudDetailStyle" >
+        <!-- Content will be displayed here when hovering over an element with a tooltip -->
       </div>
     </div>
     <script type="text/javascript" src="./js/TagCloud.min.js"></script>
 
     <script>
       let jsonDetailData;
+      let selectedLanguages;
       class SeededRandom {
         constructor(seed) {
           this.seed = seed % 2147483647;
@@ -138,7 +142,7 @@
       .then(data => {
         jsonDetailData = data;
         const numberOfItemsToPick = 30;
-        const selectedTitles = [];
+        selectedLanguages = [];
 
         // Ensure there are at least 100 items in the data
         if (jsonDetailData.length < numberOfItemsToPick) {
@@ -146,33 +150,86 @@
           return;
         }
 
-        while (selectedTitles.length < numberOfItemsToPick) {
+        while (selectedLanguages.length < numberOfItemsToPick) {
           // Get a random index within the data array
           const randomIndex = getRandomInt(0, jsonDetailData.length - 1);
-          const title = jsonDetailData[randomIndex].title;
+          const item = jsonDetailData[randomIndex];
 
-          // Check if the title is not already in the selectedTitles array
-          if (!selectedTitles.includes(title)) {
-            selectedTitles.push(title);
+          // Check if the title is not already in the selectedLanguages array
+          if (!selectedLanguages.includes(item)) {
+            selectedLanguages.push(item);
           }
         }
 
-        ready_for_pl_cloud(selectedTitles)}
+        ready_for_pl_cloud(selectedLanguages)}
         )
       .catch(error => console.error('Error fetching JSON file:', error));
       
       let tc;
-      function ready_for_pl_cloud(selectedTitles) {
+      function ready_for_pl_cloud(selectedLanguages) {
         
-        tc = TagCloud('.content', selectedTitles);
+        tc = TagCloud('.content', selectedLanguages);
         //console.log(tc);
       }
       
       
-      function displayContentMouseOver(content) {
+      function displayContentMouseOver(e) {
+        // Find the element where you want to display the content
+        var contentDisplay = document.getElementById("content-display");
+        //console.log(e);
+        for (let j = 0; j < 30; j++) {
+            //console.log(e[j])
+            //console.log(e,jsonDetailData[j].title)
+            if (e==selectedLanguages[j].title){
+              // Prepare the content to be displayed based on the input 'e'
+              var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].title + "<br></span>"
+              +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].country + "<br></span>" 
+              +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].appeared + "<br></span>"
+              +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].rank + "<br></span>"
+              +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].type + "<br></span>";
+              // Update the content display element with the new content
+              contentDisplay.innerHTML = content;
+              break;
+            }
+        }
         
-          //tipPLCloud.show(content);
-          console.log(content); 
+        
+      }
+      function hideContentMouseOut() {
+        // Find the element where you want to remove the displayed content
+        var contentDisplay = document.getElementById("content-display");
+
+        // Clear the content of the content-display element
+        contentDisplay.innerHTML = "";
+      }
+
+      function ClickOnPLCloud(e) {
+
+        for (let j = 0; j < 30; j++) {
+          if (e==selectedLanguages[j].title){
+              
+                event.preventDefault();
+                var targetSection = document.getElementById("tableId"+selectedLanguages[j].id);
+                console.log(targetSection);
+                if (targetSection) {
+                  var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - window.innerHeight / 2 + targetSection.clientHeight / 2;
+
+                  window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                  });
+
+                  // Add the flash class to the target section
+                  targetSection.classList.add('flash');
+
+                  // Remove the flash class after the animation is completed
+                  setTimeout(function () {
+                    targetSection.classList.remove('flash');
+                  }, 3000); // The duration of the flash animation in milliseconds
+                }
+            
+          }
+        }
       }
     </script>
     <script>
@@ -205,7 +262,7 @@
         function toChangeBatch() {
             if (!tc) return;
             const numberOfItemsToPick = 30;
-            const selectedTitles = [];
+            selectedLanguages = [];
 
             // Ensure there are at least 100 items in the data
             if (jsonDetailData.length < numberOfItemsToPick) {
@@ -213,21 +270,21 @@
               return;
             }
 
-            while (selectedTitles.length < numberOfItemsToPick) {
+            while (selectedLanguages.length < numberOfItemsToPick) {
               // Get a random index within the data array
               const randomIndex = getRandomInt(0, jsonDetailData.length - 1);
-              const title = jsonDetailData[randomIndex].title;
+              const item = jsonDetailData[randomIndex];
 
-              // Check if the title is not already in the selectedTitles array
-              if (!selectedTitles.includes(title)) {
-                selectedTitles.push(title);
+              // Check if the title is not already in the selectedLanguages array
+              if (!selectedLanguages.includes(item)) {
+                selectedLanguages.push(item);
               }
             }
 
-            tc.update(selectedTitles);
+            tc.update(selectedLanguages);
         }
         
-        
+       
   
         // add and remove clickEvent
         function clickEventHandler(e) {
@@ -237,12 +294,15 @@
         }
         function addClickEvent() {
             var rootEl = document.querySelector('.content');
+
             rootEl.addEventListener('click', clickEventHandler);
         }
         function removeClickEvent() {
             var rootEl = document.querySelector('.content');
             rootEl.removeEventListener('click', clickEventHandler);
         }
+        
+        
     </script>
   </div>
   </section>
@@ -778,17 +838,18 @@
  
 
   
- 
+  <div class="heading text-center">
+    <h2>Table of Details</h2>
+    <p>
+      
+    </p>
+  </div>
+  <div class="heading text-center">
+    <button id="toggle-section">Show Details of the Programming Languages</button>
+  </div>
   <section id="hidden-table">
-    <div class="heading text-center">
-      <h2>Table of Details</h2>
-      <p>
-        
-      </p>
-    </div>
-    <div class="heading text-center">
-      <button id="toggle-section">Show Details of the Programming Languages</button>
-    </div>
+    
+    
     <table id="languages">
       <tr>
         <th>Title</th>

@@ -1941,3 +1941,34 @@ a_PLcloud:hover {
 	background-color: rgba(255, 255, 255, .1);
 	border: 1px solid #fff;
 }
+
+.PlCloud-tooltip {
+	background-color: rgba(0, 0, 0, 0.8);
+	border-radius: 5px;
+	color: white;
+	font-size: 14px;
+	padding: 5px 10px;
+	pointer-events: none;
+  }
+
+.PlCloudDetailStyle{
+	font-size: 20px;
+	color: white;
+}
+
+
+.PlCloudDetailStyle{
+	font-size: 20;
+}
+
+.PlCloudDetailStyleName{
+	color: rgb(255, 163, 43);
+}
+
+.PlCloudDetailStyleVal{
+	color: black;
+}
+
+.FontSize20{
+	font-size: 20;
+}
