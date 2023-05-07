@@ -182,11 +182,11 @@
             //console.log(e,jsonDetailData[j].title)
             if (e==selectedLanguages[j].title){
               // Prepare the content to be displayed based on the input 'e'
-              var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].title + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].country + "<br></span>" 
-              +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].appeared + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].rank + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[j].type + "<br></span>";
+              var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].title + "<br></span>"
+              +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].country + "<br></span>" 
+              +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].appeared + "<br></span>"
+              +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].rank + "<br></span>"
+              +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].type + "<br></span>";
               // Update the content display element with the new content
               contentDisplay.innerHTML = content;
               break;
