@@ -106,7 +106,7 @@ Our primary inspiration for this project stems from our personal experiences, as
 
 ## Milestone 2 (7th May, 5pm)
 
-Here is the link to our website prototype: [https://com-480-data-visualization.github.io/project-2023-data-virtuosos)](https://com-480-data-visualization.github.io/project-2023-data-virtuosos)
+Here is the link to our website prototype: [https://com-480-data-visualization.github.io/project-2023-data-virtuosos](https://com-480-data-visualization.github.io/project-2023-data-virtuosos)
 Here is our report: [DV_milestone2.pdf](DV_milestone2.pdf)
 
 
