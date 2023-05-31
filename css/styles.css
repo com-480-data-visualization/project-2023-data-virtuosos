@@ -1794,12 +1794,7 @@ nav#filter li {
 	  .details{
 		color:white;
 	  }
-/*CSS for global map*/
-	  .graph-center {
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-	  }
+
 /*CSS for table map*/
 	  #customers {
 		font-family: Arial, Helvetica, sans-serif;
@@ -1942,15 +1937,8 @@ a_PLcloud:hover {
 	border: 1px solid #fff;
 }
 
-.PlCloud-tooltip {
-	background-color: rgba(0, 0, 0, 0.8);
-	border-radius: 5px;
-	color: white;
-	font-size: 14px;
-	padding: 5px 10px;
-	pointer-events: none;
-  }
 
+/*
 .PlCloudDetailStyle{
 	font-size: 20px;
 	color: white;
@@ -1968,7 +1956,55 @@ a_PLcloud:hover {
 .PlCloudDetailStyleVal{
 	color: black;
 }
-
+*/
 .FontSize20{
 	font-size: 20;
 }
+
+.PlCloudDetailStyle {
+    /* font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6; */
+    background-color: rgba(31, 31, 31, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.1s ease;
+}
+
+
+
+.PlCloudDetailStyleName{
+    color: #9CDCFE; /* Light blue, similar to syntax highlighting for keywords */
+}
+
+.PlCloudDetailStyleVal{
+    color: #6A9955; /* Light green, similar to syntax highlighting for strings */
+}
+
+
+
+.content-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+  }
+  
+  .content {
+	flex: 1 1 50%;
+  }
+
+  .placeholder_style {
+	flex: 1 1 20%;
+  }
+  
+  .content-display {
+	flex: 1 1 20%;
+	text-align: left;
+  }
+
+/*CSS for global map*/
+.graph-center {
+	flex: 1 1 40%;
+	display: block;
+
+  }
