@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 //console.log("inside globalmap_script.js")
+=======
+console.log("inside globalmap_script.js")
+>>>>>>> 13255cddf0b003b3cd489a3e03a8d23b05c438f7
 var format = d3.format(",");
 
 // Set tooltips
@@ -18,8 +22,12 @@ var tip = d3.tip()
         const innerArray = d.Pls[tmp_i];
         if (innerArray[0] == null) break;
 
+<<<<<<< HEAD
         //tmpString = tmpString + `<br><a href='#tableId${innerArray[0]}' class='scroll-link2' data-section='tableId${innerArray[0]}'>Rank:${innerArray[2]} Name:${innerArray[1]}</a>`;
         tmpString = tmpString + `<br><a onmouseover="handleMouseOver_global_map(event, ${innerArray[2]})" onmouseout="handleMouseOut_global_map(event)">Rank:${innerArray[2]} Name:${innerArray[1]}</a>`;
+=======
+        tmpString = tmpString + `<br><a href='#tableId${innerArray[0]}' class='scroll-link2' data-section='tableId${innerArray[0]}'>Rank:${innerArray[2]} Name:${innerArray[1]}</a>`;
+>>>>>>> 13255cddf0b003b3cd489a3e03a8d23b05c438f7
 
     }
 
@@ -28,6 +36,7 @@ var tip = d3.tip()
 
     })
 
+<<<<<<< HEAD
 
 
 
@@ -63,6 +72,8 @@ function handleMouseOut_global_map(event) {
 
 
 
+=======
+>>>>>>> 13255cddf0b003b3cd489a3e03a8d23b05c438f7
 function scrollToElement(id) {
     const element = document.getElementById(id);
     if (element) {
@@ -72,7 +83,10 @@ function scrollToElement(id) {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 13255cddf0b003b3cd489a3e03a8d23b05c438f7
 document.addEventListener('click', function (e) {
     if (e.target.classList.contains('scroll-link2')) {
     e.preventDefault();
@@ -109,7 +123,11 @@ var color = d3.scaleThreshold()
 
 var path = d3.geoPath();
 
+<<<<<<< HEAD
 var svg = d3.select(".graph-center")
+=======
+var svg = d3.select("body")
+>>>>>>> 13255cddf0b003b3cd489a3e03a8d23b05c438f7
     .append("svg")
     .attr("width", width)
     .attr("height", height)
