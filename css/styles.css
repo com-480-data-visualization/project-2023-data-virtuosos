@@ -1990,21 +1990,28 @@ a_PLcloud:hover {
   }
   
   .content {
-	flex: 1 1 50%;
+	flex: 0 0 40%;
   }
 
   .placeholder_style {
-	flex: 1 1 20%;
+	flex: 0 0 15%;
   }
   
   .content-display {
-	flex: 1 1 20%;
+	flex: 0 0 15%;
 	text-align: left;
   }
 
 /*CSS for global map*/
 .graph-center {
-	flex: 1 1 40%;
 	display: block;
-
+	margin-left: auto;
+	margin-right: auto;
   }
+
+.graph-center_globalmap{
+flex: 0 0 40%;
+display: block;
+
+}
+

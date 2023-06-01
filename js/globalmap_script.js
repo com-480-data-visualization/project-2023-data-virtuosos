@@ -109,11 +109,11 @@ var color = d3.scaleThreshold()
 
 var path = d3.geoPath();
 
-var svg = d3.select(".graph-center")
+var svg = d3.select(".graph-center_globalmap")
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .attr("class", "graph-center") // Add this line to apply the CSS class
+    .attr("class", "graph-center_globalmap") // Add this line to apply the CSS class
     .append('g')
     .attr('class', 'map');
 

@@ -336,7 +336,7 @@
         <!-- Content will be displayed here when hovering over an element with a tooltip -->
       </div>
 
-      <div class="graph-center">
+      <div class="graph-center_globalmap">
         <script src="js/d3.v4.min.js"></script>
         <script src="d3-tip.js"></script>
         <script src="js/globalmap_script.js"></script>
@@ -358,36 +358,79 @@
 
   <section id="lda" class="page-section colord">
     <script src="js/d3.v3.js"></script>
-    <div class="container">
-      <div class="heading text-center">
-        <h2>LDA Visualization</h2>
-        <p>
-          Filter programming languages before selected year with left slider.<br>
-          Choose language in right selection box.<br>
-          Visualize keywords with LDA topic and relevance metric.
-        </p>
+    <div class="content-wrapper">
+      <div class="placeholder_style">
+
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label for="year-slider">Select Year:</label>
-          <input type="range" min="1950" max="2022" value="2022" class="slider" id="year-slider">
-          <p>Year: <span id="year-display"></span></p>
-        </div>
-        <div class="col-md-6">
-          <label for="language-select">Select Programming Language:
-            <button type="button" class="btn btn-info btn-sm" id="info-btn" data-toggle="tooltip" data-placement="right" title="">
-              i
-            </button>
-          </label>          
-          <select id="language-select" class="custom-select"></select>
-        </div>
+      <script>
+        let selectedLanguage="Java"
+        let selectedLanguageRank=0
+      </script>
+      <div class="graph-center_globalmap">
+        <div class="container">
+          <div class="heading text-center">
+            <h2>LDA Visualization</h2>
+            <p>
+              Filter programming languages before selected year with left slider.<br>
+              Choose language in right selection box.<br>
+              Visualize keywords with LDA topic and relevance metric.
+            </p>
+          </div> 
+          
+          <div class="row">
+            <div class="col-md-6">
+              <label for="year-slider">Select Year:</label>
+              <input type="range" min="1950" max="2022" value="2022" class="slider" id="year-slider">
+              <p>Year: <span id="year-display"></span></p>
+            </div>
+            <div class="col-md-6">
+              <label for="language-select">Select Programming Language:
+                <button type="button"  class="btn btn-info btn-sm" id="info-btn" data-toggle="tooltip" data-placement="right" title="" onmouseover="handleMouseOver_lda(event)" onmouseout="handleMouseOut_lda(event)">
+                  i
+                </button>
+                <script>
+                  function handleMouseOver_lda() {
+                    var contentDisplay = document.getElementById("content-display_lda");
+      
+                    // Prepare the content to be displayed based on the input 'e'
+                    var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[selectedLanguageRank].title + "<br></span>"
+                    +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[selectedLanguageRank].country + "<br></span>" 
+                    +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[selectedLanguageRank].appeared + "<br></span>"
+                    +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[selectedLanguageRank].rank + "<br></span>"
+                    +"<strong class='PlCloudDetailStyleName'>Number of Users: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[selectedLanguageRank].numberOfUsers + "<br></span>"
+                    +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[selectedLanguageRank].type + "<br></span>";
+                    
+                    // Update the content display element with the new content
+                    contentDisplay.innerHTML = content;
+                            
+                    contentDisplay.classList.add('PlCloudDetailStyle');
+                  }
+                  function handleMouseOut_lda(event){
+                    var contentDisplay = document.getElementById("content-display_lda");
+
+                    // Clear the content of the content-display element
+                    contentDisplay.innerHTML = "";
+                    contentDisplay.classList.remove('PlCloudDetailStyle');
+                  }
+                </script>
+              </label>          
+              <select id="language-select" class="custom-select"></select>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div id="lda-vis"></div>
+            </div>
+          </div><!-- row end-->
+         
+        </div><!-- container end-->
+      </div> <!-- graph-center_globalmap end -->
+      <div id="content-display_lda" class="content-display">
+        <!-- Content will be displayed here when hovering over an element with a tooltip -->
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div id="lda-vis"></div>
-        </div>
-      </div>
-    </div>
+    </div> <!-- content-wrapper end -->
+ 
   </section>
 
   <div class="separator-line"></div>
@@ -400,6 +443,18 @@
         Hover a node to see the language details.
       </p>
     </div>
+    <div class="content-wrapper">
+      <div class="placeholder_style">
+        
+      </div>
+
+      <div class="graph-center_network">
+      </div>
+
+    <div id="content-display_network" class="content-display">
+      <!-- Content will be displayed here when hovering over an element with a tooltip -->
+    </div>
+
     <style>
       .node {
         stroke: #fff;
@@ -470,6 +525,8 @@
               "<strong>numberOfUsers:</strong> <span style='color:white'>" + d.numberOfUsers + "</span><br/>" +
               "<strong>Type:</strong> <span style='color:" + colorScale(d.type) + "'>" + d.type + "</span>";
           });
+
+        
         function scrollToElement(id) {
           const element = document.getElementById(id);
           if (element) {
@@ -504,11 +561,12 @@
             }
           }
         });
+
         // Initialize the SVG
-        var svg = d3.select("#network").append("svg")
+        var svg = d3.select(".graph-center_network").append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
-          .attr("class", "graph-center") // Add this line to apply the CSS class
+          .attr("class", "graph-center_network") // Add this line to apply the CSS class
           .call(zoom)
           .call(tip)
           .append("g")
@@ -545,12 +603,31 @@
             window.open("#tableId" + d.title, '_self'); // Add this line to make the node clickable
           })
           .on('mouseover', function(d){
-            tip.show(d, d3.event.target);
+            //tip.show(d, d3.event.target);
             d3.select(this).attr("fill", colorScale(d.type));
+            console.log("click network: ",d);
+            var contentDisplay = document.getElementById("content-display_network");
+    
+            // Prepare the content to be displayed based on the input 'e'
+            var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].title + "<br></span>"
+            +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].country + "<br></span>" 
+            +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].appeared + "<br></span>"
+            +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].rank + "<br></span>"
+            +"<strong class='PlCloudDetailStyleName'>Number of Users: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].numberOfUsers + "<br></span>"
+            +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal' style='color:"+ colorScale(d.type) + "'>" + jsonDetailData[d.rank].type + "<br></span>";
+            // Update the content display element with the new content
+            contentDisplay.innerHTML = content;
+                    
+            contentDisplay.classList.add('PlCloudDetailStyle');
           })
           .on('mouseout', function(d){
-            tip.hide(d, d3.event.target);
+            //tip.hide(d, d3.event.target);
             d3.select(this).attr("fill", genrateColor(d));
+            var contentDisplay = document.getElementById("content-display_network");
+
+            // Clear the content of the content-display element
+            contentDisplay.innerHTML = "";
+            contentDisplay.classList.remove('PlCloudDetailStyle');
           })
           .call(d3.drag()
           .on("start", dragstarted)

@@ -20,7 +20,8 @@ $(document).ready(function () {
                 option.text = lang.title;
                 $("#language-select").append(option);
             });
-
+            selectedLanguage=languages[0].title;
+            selectedLanguageRank=languages[0].rank;
             // Set the selected option text as the first option
             $("#language-select").val(languages[0].title);
         }
@@ -89,7 +90,14 @@ $(document).ready(function () {
   
         // Update the UI when the language is changed
         $("#language-select").on("change", async function () {
-            let selectedLanguage = $(this).val();
+            selectedLanguage = $(this).val();// update the selected language
+            languages.forEach(function (lang) { 
+                if(lang.title==selectedLanguage){
+                    selectedLanguageRank=lang.rank;
+                }
+            })
+
+        
             await displayLDAVis(selectedLanguage);
       
             // Get info about the selected language
@@ -108,5 +116,7 @@ $(document).ready(function () {
         // Initialize the tooltip for the first language
         let info = getLanguageInfo(languages[0].title);
         $('#info-btn').attr('data-original-title', info).tooltip('hide');
+
+        
     });
 });
