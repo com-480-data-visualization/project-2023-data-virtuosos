@@ -56,7 +56,27 @@ $(document).ready(function () {
                 new LDAvis("#" + visDiv.attr("id"), `data/lda/${language}.json`);
                 resolve();
             });
-        }                    
+        }
+
+        // Get language information
+        function getLanguageInfo(language) {
+            // This is just a simple example. In a real application, you'd likely
+            // want to retrieve this information from a database or API.
+            let languageInfo = {
+                'Python': 'Python is a high-level, interpreted programming language.',
+                'JavaScript': 'JavaScript is a dynamic, loosely typed, object-based, and interpreted scripting language.',
+                'C#': 'C# (C-Sharp) is a programming language developed by Microsoft that runs on the .NET Framework.',
+                // ...and so on for other languages
+            };
+        
+            return languageInfo[language];
+        }
+        
+        // Initialize the tooltips
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+          
   
         // Update the UI when the year is changed
         $("#year-slider").on("input", debounce(function () {
@@ -69,7 +89,14 @@ $(document).ready(function () {
   
         // Update the UI when the language is changed
         $("#language-select").on("change", async function () {
-            await displayLDAVis($(this).val());
+            let selectedLanguage = $(this).val();
+            await displayLDAVis(selectedLanguage);
+      
+            // Get info about the selected language
+            let info = getLanguageInfo(selectedLanguage);
+    
+            // Update the tooltip content
+            $('#info-btn').attr('data-original-title', info).tooltip('hide');
         });
   
         // Initialize the UI
@@ -77,5 +104,9 @@ $(document).ready(function () {
         const languages = filterLanguages(currentYear);
         updateLanguageSelect(languages);
         displayLDAVis(languages[0].title);
+
+        // Initialize the tooltip for the first language
+        let info = getLanguageInfo(languages[0].title);
+        $('#info-btn').attr('data-original-title', info).tooltip('hide');
     });
 });
