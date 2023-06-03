@@ -1259,7 +1259,8 @@ LDAvis = function(to_select, json_file) {
                 .transition()
                 .style("font-size", function(d) {
                     return +d;
-                });
+                })
+                .style("stroke", "gray");
 
             // Alter the guide
             d3.select(".circleGuideTitle")
