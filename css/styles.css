@@ -1878,7 +1878,7 @@ nav#filter li {
 
 /* White line separator*/
 .separator-line {
-	width: 80%;
+	width: 75%;
 	height: 2px; /* Adjust the height to control the thickness of the white line */
 	background-color: rgb(159, 196, 248);
 	margin: 0 auto; /* Center the line horizontally */
