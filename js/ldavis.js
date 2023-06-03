@@ -373,7 +373,7 @@ LDAvis = function(to_select, json_file) {
             .attr("y", function(d) {
                 return (yScale(+d.y) + 4);
             })
-            .attr("stroke", "black")
+            .attr("stroke", "gray")
             .attr("opacity", 1)
             .style("text-anchor", "middle")
             .style("font-size", "11px")
