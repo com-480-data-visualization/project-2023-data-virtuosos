@@ -41,7 +41,7 @@ function handleMouseOver_global_map(event,rank) {
     
     // Prepare the content to be displayed based on the input 'e'
     var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[rank].title + "<br></span>"
-    +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[rank].country + "<br></span>" 
+    +"<strong class='PlCloudDetailStyleName'>Country/Region: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[rank].country + "<br></span>" 
     +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[rank].appeared + "<br></span>"
     +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[rank].rank + "<br></span>"
     +"<strong class='PlCloudDetailStyleName'>Number of Users: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[rank].numberOfUsers + "<br></span>"
