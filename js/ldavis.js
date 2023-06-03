@@ -278,7 +278,7 @@ LDAvis = function(to_select, json_file) {
     	    .attr("x", 0)
     	    .attr("y", mdsheight/2 - 5)
     	    .text(data['plot.opts'].xlab)
-    	    .attr("fill", "gray");
+    	    .attr("fill", "white");
 
         mdsplot.append("line") // draw y-axis
             .attr("x1", mdswidth / 2)
@@ -291,7 +291,7 @@ LDAvis = function(to_select, json_file) {
     	    .attr("x", mdswidth/2 + 5)
     	    .attr("y", 7)
     	    .text(data['plot.opts'].ylab)
-    	    .attr("fill", "gray");
+    	    .attr("fill", "white");
 
     	// new definitions based on fixing the sum of the areas of the default topic circles:
     	var newSmall = Math.sqrt(0.02*mdsarea*circle_prop/Math.PI);
@@ -1281,7 +1281,8 @@ LDAvis = function(to_select, json_file) {
             // Change sizes of topic numbers:
             d3.selectAll(".txt")
                 .transition()
-                .style("font-size", "11px");
+                .style("font-size", "11px")
+                .style("stroke", "gray");
 
             // Go back to the default guide
             d3.select(".circleGuideTitle")
