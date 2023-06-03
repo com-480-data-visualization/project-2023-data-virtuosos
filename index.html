@@ -40,6 +40,31 @@
 </head>
 
 <body>
+  <div class="matrix-background">
+    <canvas id="matrixCanvas"></canvas>
+    <style>
+      body {
+
+          margin: 0;
+          padding: 0;
+
+      }
+      #matrixCanvas {
+
+        position: fixed; /* Fix the position to the viewport */
+        top: 0;          /* Set top to 0 */
+        left: 0;         /* Set left to 0 */
+        width: 100vw;    /* Set width to 100% of viewport width */
+        height: 100vh;   /* Set height to 100% of viewport height */
+        z-index: -1;
+        background-color: white;
+      }
+  </style>
+  
+  
+  </div>
+  
+  
   <header class="header">
     <div class="container">
       <nav class="navbar navbar-inverse" role="navigation">
@@ -94,7 +119,7 @@
 
     <div class="heading text-center">
       <!-- Heading -->
-      <h2>Programming Languages Cloud</h2>
+      <h2 class="BlueTitle">Programming Languages Cloud</h2>
       <p>
         Effortlessly hover over each programming language to uncover additional information
       </p>
@@ -104,6 +129,8 @@
 
       <ul2 class="FontSize20">
         <li ><a onclick="toChangeBatch()" >Change to a new Batch: Explore another 30 programming languages </a></li>
+        <li><a  onclick="pause()">Pause Animation</a></li>
+        <li><a onclick="resume()">Resume Animation</a></li>
       </ul2>
       <div class="content-wrapper">
         <div class="placeholder_style">
@@ -122,198 +149,9 @@
     <script>
       let jsonDetailData;
       let selectedLanguages;
-      class SeededRandom {
-        constructor(seed) {
-          this.seed = seed % 2147483647;
-          if (this.seed <= 0) {
-            this.seed += 2147483646;
-          }
-        }
-
-        next() {
-          return this.seed = this.seed * 16807 % 2147483647;
-        }
-
-        nextFloat() {
-          return (this.next() - 1) / 2147483646;
-        }
-      }
-      function getRandomInt(min, max, seed) {
-        const randomGenerator = new SeededRandom(seed);
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-      fetch("./data/details_data.json")
-      .then(response => response.json())
-      .then(data => {
-        jsonDetailData = data;
-        const numberOfItemsToPick = 30;
-        selectedLanguages = [];
-
-        // Ensure there are at least 100 items in the data
-        if (jsonDetailData.length < numberOfItemsToPick) {
-          console.error('Not enough items in the data to pick 100 random items');
-          return;
-        }
-
-        while (selectedLanguages.length < numberOfItemsToPick) {
-          // Get a random index within the data array
-          const randomIndex = getRandomInt(0, jsonDetailData.length - 1);
-          const item = jsonDetailData[randomIndex];
-
-          // Check if the title is not already in the selectedLanguages array
-          if (!selectedLanguages.includes(item)) {
-            selectedLanguages.push(item);
-          }
-        }
-
-        ready_for_pl_cloud(selectedLanguages)}
-        )
       
-      .catch(error => console.error('Error fetching JSON file:', error));
-      
-      let tc;
-      function ready_for_pl_cloud(selectedLanguages) {
-        
-        tc = TagCloud('.content', selectedLanguages);
-        //console.log(tc);
-      }
-      
-      
-      function displayContentMouseOver(e) {
-        // Find the element where you want to display the content
-        var contentDisplay = document.getElementById("content-display_plCloud");
-        //console.log(e);
-        for (let j = 0; j < 30; j++) {
-            //console.log(e[j])
-            //console.log(e,jsonDetailData[j].title)
-            if (e==selectedLanguages[j].title){
-              // Prepare the content to be displayed based on the input 'e'
-              var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].title + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].country + "<br></span>" 
-              +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].appeared + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].rank + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Number of Users: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].numberOfUsers + "<br></span>"
-              +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal'>" + selectedLanguages[j].type + "<br></span>";
-              // Update the content display element with the new content
-              contentDisplay.innerHTML = content;
-              break;
-            }
-        }
-        contentDisplay.classList.add('PlCloudDetailStyle');
-        
-      }
-      function hideContentMouseOut() {
-        // Find the element where you want to remove the displayed content
-        var contentDisplay = document.getElementById("content-display_plCloud");
-
-        // Clear the content of the content-display element
-        contentDisplay.innerHTML = "";
-        contentDisplay.classList.remove('PlCloudDetailStyle');
-      }
-
-      function ClickOnPLCloud(e) {
-
-        for (let j = 0; j < 30; j++) {
-          if (e==selectedLanguages[j].title){
-              
-                event.preventDefault();
-                var targetSection = document.getElementById("tableId"+selectedLanguages[j].id);
-                console.log(targetSection);
-                if (targetSection) {
-                  var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - window.innerHeight / 2 + targetSection.clientHeight / 2;
-
-                  window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                  });
-
-                  // Add the flash class to the target section
-                  targetSection.classList.add('flash');
-
-                  // Remove the flash class after the animation is completed
-                  setTimeout(function () {
-                    targetSection.classList.remove('flash');
-                  }, 3000); // The duration of the flash animation in milliseconds
-                }
-            
-          }
-        }
-      }
     </script>
-    <script>
-        // switch style
-        function toDefault() { document.body.classList.remove('light'); }
-        function toLight() { document.body.classList.add('light'); }
-        // add / remove tag
-        function addTag() {
-            if (!tc) return;
-            texts.push('New');
-            tc.update(texts);
-        }
-        function removeTag() {
-            if (!tc) return;
-            texts.pop();
-            tc.update(texts);
-        }
-        var otherTcs = [];
-        // create and destroy tagcloud
-        function toCreate() {
-            if (otherTcs.length >= 3) return;
-            otherTcs.push(TagCloud('.content', texts));
-        }
-        function toDestroy() {
-            var last = otherTcs[otherTcs.length - 1];
-            if (!last) return;
-            last.destroy();
-            otherTcs.pop();
-        }
-        function toChangeBatch() {
-            if (!tc) return;
-            const numberOfItemsToPick = 30;
-            selectedLanguages = [];
-
-            // Ensure there are at least 100 items in the data
-            if (jsonDetailData.length < numberOfItemsToPick) {
-              console.error('Not enough items in the data to pick 100 random items');
-              return;
-            }
-
-            while (selectedLanguages.length < numberOfItemsToPick) {
-              // Get a random index within the data array
-              const randomIndex = getRandomInt(0, jsonDetailData.length - 1);
-              const item = jsonDetailData[randomIndex];
-
-              // Check if the title is not already in the selectedLanguages array
-              if (!selectedLanguages.includes(item)) {
-                selectedLanguages.push(item);
-              }
-            }
-            console.log("new batch:",selectedLanguages);
-            tc.update(selectedLanguages);
-        }
-        
-       
-  
-        // add and remove clickEvent
-        function clickEventHandler(e) {
-            if (e.target.className === 'tagcloud--item') {
-                window.open(`https://www.google.com/search?q=${e.target.innerText}`, '_blank');
-            }
-        }
-        function addClickEvent() {
-            var rootEl = document.querySelector('.content');
-
-            rootEl.addEventListener('click', clickEventHandler);
-        }
-        function removeClickEvent() {
-            var rootEl = document.querySelector('.content');
-            rootEl.removeEventListener('click', clickEventHandler);
-        }
-        
-        
-    </script>
+    <script src="js/cloud_script.js"> </script>
   </div>
   </section>
 
@@ -322,9 +160,11 @@
   <section id="globalmap">
     <div class="heading text-center">
       <!-- Heading -->
-      <h2>Distribution of Developers for Various Programming Languages Across Different Countries</h2>
+      <h2>Distribution of Developers for <br> Various Programming Languages <br> Across Different Countries</h2>
       <p>
-        Hover over each country to see details and click on a country to pin the list of details. Within these details, you can click on individual programming languages to learn more about the top3 most popular languages.<br>
+        Hover over each country to see details and click on a country to pin the list of details. 
+        <br>
+        Within these details, you can click on individual programming languages to learn more about the top3 most popular languages.<br>
         <br>
         A programming language may be developed collaboratively by multiple countries.
         <br>Therefore, we allocate a fraction, calculated as (1/the total number of countries contributing to its
@@ -379,12 +219,12 @@
           
           <div class="row">
             <div class="col-md-6">
-              <label for="year-slider">Select Year:</label>
+              <p for="year-slider">Select Year:</p>
               <input type="range" min="1950" max="2022" value="2022" class="slider" id="year-slider">
               <p>Year: <span id="year-display"></span></p>
             </div>
             <div class="col-md-6">
-              <label for="language-select">Select Programming Language:
+              <p for="language-select">Select Programming Language:
                 <button type="button"  class="btn btn-info btn-sm" id="info-btn" data-toggle="tooltip" data-placement="right" title="" onmouseover="handleMouseOver_lda(event)" onmouseout="handleMouseOut_lda(event)">
                   i
                 </button>
@@ -413,7 +253,7 @@
                     contentDisplay.classList.remove('PlCloudDetailStyle');
                   }
                 </script>
-              </label>          
+              </p>          
               <select id="language-select" class="custom-select"></select>
             </div>
           </div>
@@ -472,330 +312,11 @@
     <script src="https://d3js.org/queue.v1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 
-
-    <script>
-      const nodesDataFile = './data/nodes_total.json';
-      const edgesDataFile = './data/edges_total.json';
-      // Generate a mock dataset for the network graph
-      var nodes_data;
-      var links_data;
-      var types = ['pl', 'queryLanguage', 'textMarkup', 'os', 'dataNotation',
-        'stylesheetLanguage', 'assembly', 'protocol', 'library', 'schema',
-        'editor', 'application', 'framework',
-        'hardwareDescriptionLanguage', 'contractLanguage',
-        'characterEncoding', 'cloud', 'template', 'grammarLanguage',
-        'xmlFormat', 'wikiMarkup'];
-
-      d3.queue()
-        .defer(d3.json, nodesDataFile)
-        .defer(d3.json, edgesDataFile)
-        .await((error, nodesData, edgesData) => {
-          if (error) throw error;
-          nodes_data = nodesData;
-          links_data = edgesData;
-          initNetworkGraph(nodesData, edgesData);
-        });
-
-      function initNetworkGraph(nodesData, edgesData) {
-        // Set the dimensions and
-        // margins of the graph
-        var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-          width = 960 - margin.left - margin.right,
-          height = 600 - margin.top - margin.bottom;
-
-        var zoom = d3.zoom()
-          .scaleExtent([0.1, 10]) // 设置缩放的最小和最大比例
-          .on("zoom", zoomed); // 当缩放发生时，调用名为 "zoomed" 的函数
-
-        var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-        
-        function genrateColor(d){
-          var baseColor = colorScale(d.type);
-          return d3.interpolateRgb(baseColor, "#fff")(0.5);
-        }
-
-        var tip = d3.tip()
-          .attr("class", "d3-tip")
-          .offset([-10, 0])
-          .html(function (d) {
-            return "<strong>Title:</strong> <span style='color:white'>" + d.title + "</span><br/>" +
-              "<strong>Country:</strong> <span style='color:white'>" + d.country + "</span><br/>" +
-              "<strong>Appeared:</strong> <span style='color:white'>" + d.appeared + "</span><br/>" + 
-              "<strong>Rank:</strong> <span style='color:white'>" + d.rank + "</span><br/>" +
-              "<strong>numberOfUsers:</strong> <span style='color:white'>" + d.numberOfUsers + "</span><br/>" +
-              "<strong>Type:</strong> <span style='color:" + colorScale(d.type) + "'>" + d.type + "</span>";
-          });
-
-        
-        function scrollToElement(id) {
-          const element = document.getElementById(id);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-
-
-
-        document.addEventListener('click', function (e) {
-          if (e.target.classList.contains('scroll-link2')) {
-            e.preventDefault();
-
-            var targetSectionId = e.target.getAttribute('data-section');
-            var targetSection = document.getElementById(targetSectionId);
-
-            if (targetSection) {
-              var targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - window.innerHeight / 2 + targetSection.clientHeight / 2;
-
-              window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-              });
-
-              // Add the flash class to the target section
-              targetSection.classList.add('flash');
-
-              // Remove the flash class after the animation is completed
-              setTimeout(function () {
-                targetSection.classList.remove('flash');
-              }, 3000); // The duration of the flash animation in milliseconds
-            }
-          }
-        });
-
-        // Initialize the SVG
-        var svg = d3.select(".graph-center_network").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .attr("class", "graph-center_network") // Add this line to apply the CSS class
-          .call(zoom)
-          .call(tip)
-          .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
-        var legend = svg.append("g")
-          .attr("class", "legend")
-          .attr("transform", "translate(" + (width - 100) + "," + (height - 550) + ")");
-          
-        // Initialize the force layout
-        var simulation = d3.forceSimulation()
-          .force("link", d3.forceLink().id(function (d) { return d.title; }).distance(100))
-          .force("charge", d3.forceManyBody().strength(-5))
-          .force("center", d3.forceCenter(width / 2, height / 2));
-
-        // Create the links
-        var link = svg.append("g")
-          .attr("class", "links")
-          .selectAll("line")
-          .data(links_data)
-          .enter().append("line")
-          .attr("stroke", "#999") // Add this line to set the stroke color
-          .attr("stroke-width", function (d) { return Math.sqrt(1); });
-
-        // Create the nodes
-        var node = svg.append("g")
-          .attr("class", "nodes")
-          .selectAll("circle")
-          .data(nodes_data)
-          .enter().append("circle")
-          .attr("r", 10)
-          .attr("fill", function (d) { return genrateColor(d); })
-          .on('click', function (d) {
-            window.open("#tableId" + d.title, '_self'); // Add this line to make the node clickable
-          })
-          .on('mouseover', function(d){
-            //tip.show(d, d3.event.target);
-            d3.select(this).attr("fill", colorScale(d.type));
-            console.log("click network: ",d);
-            var contentDisplay = document.getElementById("content-display_network");
-    
-            // Prepare the content to be displayed based on the input 'e'
-            var content = "<strong class='PlCloudDetailStyleName'>Title: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].title + "<br></span>"
-            +"<strong class='PlCloudDetailStyleName'>Country: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].country + "<br></span>" 
-            +"<strong class='PlCloudDetailStyleName'>Appeared: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].appeared + "<br></span>"
-            +"<strong class='PlCloudDetailStyleName'>Rank: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].rank + "<br></span>"
-            +"<strong class='PlCloudDetailStyleName'>Number of Users: </strong><span class='PlCloudDetailStyleVal'>" + jsonDetailData[d.rank].numberOfUsers + "<br></span>"
-            +"<strong class='PlCloudDetailStyleName'>Type: </strong><span class='PlCloudDetailStyleVal' style='color:"+ colorScale(d.type) + "'>" + jsonDetailData[d.rank].type + "<br></span>";
-            // Update the content display element with the new content
-            contentDisplay.innerHTML = content;
-                    
-            contentDisplay.classList.add('PlCloudDetailStyle');
-          })
-          .on('mouseout', function(d){
-            //tip.hide(d, d3.event.target);
-            d3.select(this).attr("fill", genrateColor(d));
-            var contentDisplay = document.getElementById("content-display_network");
-
-            // Clear the content of the content-display element
-            contentDisplay.innerHTML = "";
-            contentDisplay.classList.remove('PlCloudDetailStyle');
-          })
-          .call(d3.drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended));
-
-        types.forEach(function (type, i) {
-          legend.append("rect")
-            .attr("x", 0)
-            .attr("y", i * 25)
-            .attr("width", 20)
-            .attr("height", 20)
-            .style("fill", colorScale(type));
-
-          legend.append("text")
-            .attr("x", 25)
-            .attr("y", i * 25 + 15)
-            .text(type)
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "12px");
-        });
-
-
-        // Set the nodes and links in the simulation
-        simulation
-          .nodes(nodes_data)
-          .on("tick", ticked);
-
-        simulation.force("link")
-          .links(links_data);
-
-        // Update the positions of the nodes and links
-        function ticked() {
-          link
-            .attr("x1", function (d) { return d.source.x; })
-            .attr("y1", function (d) { return d.source.y; })
-            .attr("x2", function (d) { return d.target.x; })
-            .attr("y2", function (d) { return d.target.y; });
-
-          node
-            .attr("cx", function (d) { return d.x; })
-            .attr("cy", function (d) { return d.y; });
-        }
-
-        // Define the drag behavior functions
-        function dragstarted(d) {
-          if (!d3.event.active) simulation.alphaTarget(0.3).restart();
-          d.fx = d.x;
-          d.fy = d.y;
-        }
-
-        function dragged(d) {
-          d.fx = d3.event.x;
-          d.fy = d3.event.y;
-        }
-
-        function dragended(d) {
-          if (!d3.event.active) simulation.alphaTarget(0);
-          d.fx = null;
-          d.fy = null;
-        }
-        function zoomed() {
-          console.log(d3.event.transform)
-          svg.attr("transform", d3.event.transform);
-        }
-      }
-    </script>
+    <script src="js/network_script.js"> </script>
     </div>
   </section>
 
 
-
-  <!--
-  <div class="separator-line"></div>
-
-
-  <div class="heading text-center">
-    <h2>Table of Details</h2>
-    <p>
-      
-    </p>
-  </div>
-  <div class="heading text-center">
-    <button id="toggle-section">Show Details of the Programming Languages</button>
-  </div>
-  <section id="hidden-table">
-    
-    
-    <table id="languages">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Appeared</th>
-          <th>Type</th>
-          <th>Rank</th>
-          <th>Country</th>
-          <th>Wikipedia Summary</th>
-          <th>BookCount</th>
-          <th>paperCount</th>
-          <th>GithubRepo Stars</th>
-        </tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-
-<script>
-  var jQ351 = $.noConflict(true);
-  // Now jQ351 is an alias to jQuery 3.5.1
-</script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-
-<script>
-  document.addEventListener('DOMContentLoaded', loadData);
-
-  async function loadData() {
-    // Replace with the path to your JSON file or API endpoint
-    const url = './data/details_data.json';
-
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      const tableBody = document.querySelector('#languages tbody');
-
-      data.forEach(row => {
-        const tr = document.createElement('tr');
-
-        tr.innerHTML = `
-            <td id="tableId${row.id}">${row.title}</td>
-            <td>${row.appeared}</td>
-            <td>${row.type}</td>
-            <td>${row.rank}</td>
-            <td>${row.country}</td>
-            <td>${row.wikipedia_summary}</td>
-            <td>${row.bookCount}</td>
-            <td>${row.paperCount}</td>
-            <td>${row.githubRepo_stars}</td>
-        `;
-
-        tableBody.appendChild(tr);
-      });
-
-      // Initialize DataTables after adding all data to the table.
-      jQ351('#languages').DataTable({
-        "ordering": false // this disables sorting
-      });
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-</script>
-
-  </section>
-
-  <script>
-    document.getElementById('toggle-section').addEventListener('click', function () {
-      const section = document.getElementById('hidden-table');
-      section.classList.toggle('hidden');
-    });
-  
-
-  </script>
-  -->
 
   <a href="#top" class="topHome"><i class="fa fa-chevron-up fa-2x"></i></a>
 
@@ -811,6 +332,62 @@
   <script src="flexslider/jquery.flexslider.js"></script>
   <script src="js/custom.js" type="text/javascript"></script>
   <script src="js/owl-carousel/owl.carousel.js"></script>
+
+  <script>
+    var canvas = document.getElementById("matrixCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.globalAlpha = 0.5;
+    // Set the canvas size to match the window size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    // Call resizeCanvas initially and whenever the window size changes
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    //canvas.height = window.innerHeight;
+    //canvas.width = window.innerWidth;
+
+    var binary = "01";
+    binary = binary.split("");
+
+    var font_size = 10;
+    var columns = canvas.width/font_size; 
+
+    var drops = [];
+    for(var x = 0; x < columns; x++)
+        drops[x] = 1; 
+
+    function drawBinary() {
+        //ctx.fillStyle = "rgba(40,40, 40, 0.05)"; //light grey
+        //ctx.fillStyle = "rgba(25,25, 25, 0.05)"; //dark grey
+        ctx.fillStyle = "rgba(5,25, 61, 0.05)"; // dark blue
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = "#0F0";
+        ctx.font = font_size + "px arial";
+        for(var i = 0; i < drops.length; i++) {
+        // Calculate bounds for left and right sections
+        var leftBound = columns * 1/7;
+        var rightBound = columns * 6/7;
+
+        // Skip rendering in the middle third of the screen
+        if(i < leftBound || i > rightBound) {
+            var text = binary[Math.floor(Math.random() * binary.length)];
+            ctx.fillText(text, i * font_size, drops[i] * font_size);
+            
+            if(drops[i] * font_size > canvas.height && Math.random() > 0.975)
+                drops[i] = 0;
+        }
+
+        drops[i]++;
+    }
+    }
+
+    setInterval(drawBinary, 33);
+
+</script>
 </body>
 
 </html>

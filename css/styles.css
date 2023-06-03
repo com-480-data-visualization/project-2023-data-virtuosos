@@ -340,11 +340,14 @@ body {
  background: #A43E89;
 }
 p {
-	color: #858585;
+	/*color: #858585; It decides the content color*/
+	color:#D7BA7D;
 	margin: 0 0 1em !important;
+
 }
 h1, h2, h3, h4, h5, h6 {
 	font-family:36px 'Open Sans', sans-serif;
+
 }
 .fitImage {
 	max-width: 100%;
@@ -482,6 +485,7 @@ padding: 8px 12px;
 a {
 	color: #27AFD3;
 	text-decoration: none;
+	font-size: 20px; /*It decides the fontsize of a*/
 	text-shadow: none;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
@@ -872,7 +876,8 @@ a.arrow-link:hover {
 	margin: 0 auto !important;
 }
 .heading h2 {
-	color: #1E2020;
+	/*color: #1E2020;/**/
+	color: #9CDCFE;
 	font-size: 46px;
 	font-weight: bolder;
 }
@@ -888,6 +893,7 @@ a.arrow-link:hover {
 }
 .sub-heading p {
 	color: #5A5A5A;
+	
 }
 .heading {
 	padding: 3px 10px;
@@ -896,7 +902,8 @@ a.arrow-link:hover {
 	display: block;
 }
 .heading p {
-	font-size: 1.2em;
+	/*font-size: 1.2em; /*It will decide the fontsize of p*/
+	font-size: 1.8em;
 }
 .pdingBtm30 {
 	padding-bottom: 30px;
@@ -2014,4 +2021,3 @@ flex: 0 0 40%;
 display: block;
 
 }
-

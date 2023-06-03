@@ -147,7 +147,8 @@ LDAvis = function(to_select, json_file) {
                 vis_state.lambda = +this.value;
                 // adjust the text on the range slider
                 d3.select(lambda_select).property("value", vis_state.lambda);
-                d3.select(lambda_select + "-value").text(vis_state.lambda);
+                d3.select(lambda_select + "-value").text(vis_state.lambda)
+                .style("fill", "white");// change the color of the text here;
                 // transition the order of the bars
                 var increased = lambda.old < vis_state.lambda;
                 if (vis_state.topic > 0) reorder_bars(increased);
@@ -334,25 +335,29 @@ LDAvis = function(to_select, json_file) {
             .attr('class', "circleGuideTitle")
             .style("text-anchor", "left")
             .style("fontWeight", "bold")
-            .text("Marginal topic distribtion");
+            .text("Marginal topic distribtion")
+            .style("fill", "white");// change the color of the text here
         d3.select("#leftpanel").append("text")
             .attr("x", cx2 + 10)
             .attr("y", mdsheight + 2 * newSmall)
             .attr('class', "circleGuideLabelSmall")
             .style("text-anchor", "start")
-            .text(defaultLabelSmall);
+            .text(defaultLabelSmall)
+            .style("fill", "white");// change the color of the text here;
         d3.select("#leftpanel").append("text")
             .attr("x", cx2 + 10)
             .attr("y", mdsheight + 2 * newMedium)
             .attr('class', "circleGuideLabelMedium")
             .style("text-anchor", "start")
-            .text(defaultLabelMedium);
+            .text(defaultLabelMedium)
+            .style("fill", "white");// change the color of the text here;
         d3.select("#leftpanel").append("text")
             .attr("x", cx2 + 10)
             .attr("y", mdsheight + 2 * newLarge)
             .attr('class', "circleGuideLabelLarge")
             .style("text-anchor", "start")
-            .text(defaultLabelLarge);
+            .text(defaultLabelLarge)
+            .style("fill", "white");// change the color of the text here;
 
         // bind mdsData to the points in the left panel:
         var points = mdsplot.selectAll("points")
@@ -375,7 +380,8 @@ LDAvis = function(to_select, json_file) {
             .style("fontWeight", 100)
             .text(function(d) {
                 return d.topics;
-            });
+            })
+            .style("fill", "white");// change the color of the text here;
 
         // draw circles
         points.append("circle")
@@ -426,7 +432,8 @@ LDAvis = function(to_select, json_file) {
             .attr("x", mdswidth/2 + margin.left)
             .attr("y", 30)
 	    .style("font-size", "16px")
-	    .style("text-anchor", "middle");
+	    .style("text-anchor", "middle")
+        .style("fill", "white");// change the color of the text here
 
         // establish layout and vars for bar chart
         var barDefault2 = lamData.filter(function(d) {
@@ -465,8 +472,8 @@ LDAvis = function(to_select, json_file) {
             .attr("x", barguide.width + 5)
             .attr("y", mdsheight + 10 + barguide.height/2)
             .style("dominant-baseline", "middle")
-            .text("Overall term frequency");
-
+            .text("Overall term frequency")
+            .style("fill", "white");// change the color of the text here
         d3.select("#bar-freqs").append("rect")
             .attr("x", 0)
             .attr("y", mdsheight + 10 + barguide.height + 5)
@@ -478,8 +485,8 @@ LDAvis = function(to_select, json_file) {
             .attr("x", barguide.width/2 + 5)
             .attr("y", mdsheight + 10 + (3/2)*barguide.height + 5)
             .style("dominant-baseline", "middle")
-            .text("Estimated term frequency within the selected topic");
-
+            .text("Estimated term frequency within the selected topic")
+            .style("fill", "white");// change the color of the text here
 	// footnotes:
         d3.select("#bar-freqs")
             .append("a")
@@ -489,7 +496,8 @@ LDAvis = function(to_select, json_file) {
             .attr("x", 0)
             .attr("y", mdsheight + 10 + (6/2)*barguide.height + 5)
             .style("dominant-baseline", "middle")
-            .text("1. saliency(term w) = frequency(w) * [sum_t p(t | w) * log(p(t | w)/p(t))] for topics t; see Chuang et. al (2012)");
+            .text("1. saliency(term w) = frequency(w) * [sum_t p(t | w) * log(p(t | w)/p(t))] for topics t; see Chuang et. al (2012)")
+            .style("fill", "white");// change the color of the text here
         d3.select("#bar-freqs")
             .append("a")
             .attr("xlink:href", "http://nlp.stanford.edu/events/illvi2014/papers/sievert-illvi2014.pdf")
@@ -498,7 +506,8 @@ LDAvis = function(to_select, json_file) {
             .attr("x", 0)
             .attr("y", mdsheight + 10 + (8/2)*barguide.height + 5)
             .style("dominant-baseline", "middle")
-            .text("2. relevance(term w | topic t) = \u03BB * p(w | t) + (1 - \u03BB) * p(w | t)/p(w); see Sievert & Shirley (2014)");
+            .text("2. relevance(term w | topic t) = \u03BB * p(w | t) + (1 - \u03BB) * p(w | t)/p(w); see Sievert & Shirley (2014)")
+            .style("fill", "white");// change the color of the text here
 
         // Bind 'default' data to 'default' bar chart
         var basebars = chart.selectAll(".bar-totals")
@@ -536,6 +545,7 @@ LDAvis = function(to_select, json_file) {
             .text(function(d) {
                 return d.Term;
             })
+            .style("fill", "white")// change the color of the text here
             .on("mouseover", function() {
                 term_hover(this);
             })
@@ -561,8 +571,8 @@ LDAvis = function(to_select, json_file) {
             .attr("class", "bubble-tool") //  set class so we can remove it when highlight_off is called  
             .style("text-anchor", "middle")
             .style("font-size", "16px")
-            .text("Top-" + R + " Most Salient Terms");
-	
+            .text("Top-" + R + " Most Salient Terms")
+            .style("fill", "white");// change the color of the text here
         title.append("tspan")
 	    .attr("baseline-shift", "super")	    
 	    .attr("font-size", "12px")
@@ -801,9 +811,11 @@ LDAvis = function(to_select, json_file) {
                 .text(function(d) {
                     return d.Term;
                 })
+                .style("fill", "white")// change the color of the text here
                 .on("mouseover", function() {
                     term_hover(this);
                 })
+                
             // .on("click", function(d) {
             //     var old_term = termID + vis_state.term;
             //     if (vis_state.term != "" && old_term != this.id) {
@@ -1013,7 +1025,8 @@ LDAvis = function(to_select, json_file) {
 		.attr("class", "bubble-tool") //  set class so we can remove it when highlight_off is called  
 		.style("text-anchor", "middle")
 		.style("font-size", "16px")
-		.text("Top-" + R + " Most Relevant Terms for Topic " + topics + " (" + Freq + "% of tokens)");
+		.text("Top-" + R + " Most Relevant Terms for Topic " + topics + " (" + Freq + "% of tokens)")
+        .style("fill", "white");// change the color of the text here;
 	    
             // grab the bar-chart data for this topic only:
             var dat2 = lamData.filter(function(d) {
@@ -1075,7 +1088,8 @@ LDAvis = function(to_select, json_file) {
                 .style("text-anchor", "end") // right align text - use 'middle' for center alignment
                 .text(function(d) {
                     return d.Term;
-                });
+                })
+                .style("fill", "white");// change the color of the text here
 
             // Create red bars (drawn over the gray ones) to signify the frequency under the selected topic
             d3.select("#bar-freqs").selectAll(".overlay")
@@ -1115,11 +1129,13 @@ LDAvis = function(to_select, json_file) {
             circle.style.fill = color1;
 
             var title = d3.selectAll(".bubble-tool")
-		.text("Top-" + R + " Most Salient Terms");
+		.text("Top-" + R + " Most Salient Terms")
+        .style("fill", "white");// change the color of the text here
 	    title.append("tspan")
 	     	.attr("baseline-shift", "super")	    
 	     	.attr("font-size", 12)
-	     	.text(1);
+	     	.text(1)
+             .style("fill", "white");// change the color of the text here
 
             // remove the red bars
             d3.selectAll(".overlay").remove();
@@ -1165,7 +1181,8 @@ LDAvis = function(to_select, json_file) {
                 .style("text-anchor", "end") // right align text - use 'middle' for center alignment
                 .text(function(d) {
                     return d.Term;
-                });
+                })
+                .style("fill", "white");// change the color of the text here;
 
             // adapted from http://bl.ocks.org/mbostock/1166403
             var xAxis = d3.svg.axis().scale(x)
@@ -1268,7 +1285,8 @@ LDAvis = function(to_select, json_file) {
 
             // Go back to the default guide
             d3.select(".circleGuideTitle")
-                .text("Marginal topic distribution");
+                .text("Marginal topic distribution")
+                .style("fill", "white");// change the color of the text here
             d3.select(".circleGuideLabelLarge")
                 .text(defaultLabelLarge);
             d3.select(".circleGuideLabelSmall")

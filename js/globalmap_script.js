@@ -180,7 +180,9 @@ function createLegend(svg, color) {
     .append("text")
     .attr("x", function (d) { return d.x; })
     .attr("y", function (d) { return d.y; })
-    .text(function (d) { return d.text; });
+    .text(function (d) { return d.text; })
+    .style("fill", "white");
+    
 }
 
 
