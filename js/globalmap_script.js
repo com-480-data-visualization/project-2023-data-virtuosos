@@ -11,7 +11,7 @@ var tip = d3.tip()
     //console.log("insdie:", d.Pls)
     //console.log("d.properties.name:", d.properties.name)
     //console.log("d.properties.name:", d.population)
-    var tmpString = "<strong>Country: </strong><span class='details'>" + d.properties.name + "<br></span>"
+    var tmpString = "<strong>Country/Region: </strong><span class='details'>" + d.properties.name + "<br></span>"
         + "<strong>Count: </strong><span class='details'>" + format(d.population)
         + "<br><strong>Top3 popular languages: </strong><span class='details'>";
     for (let tmp_i = 0; tmp_i < d.Pls.length; tmp_i++) {
