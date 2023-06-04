@@ -1988,7 +1988,11 @@ a_PLcloud:hover {
 .PlCloudDetailStyleVal{
     color: #6A9955; /* Light green, similar to syntax highlighting for strings */
 }
-
+#globalmap, #lda {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 .content-wrapper {
@@ -1998,7 +2002,7 @@ a_PLcloud:hover {
   }
   
   .content {
-	flex: 0 0 40%;
+	flex: 0 0 50%;
   }
 
   .placeholder_style {
@@ -2021,4 +2025,8 @@ a_PLcloud:hover {
 flex: 0 0 40%;
 display: block;
 
+}
+#content-display_lda{
+	position: absolute;
+	right: 0;
 }

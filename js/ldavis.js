@@ -38,9 +38,9 @@ LDAvis = function(to_select, json_file) {
     // Set global margins used for everything
     var margin = {
         top: 30,
-        right: 30,
+        right: 0,
         bottom: 70,
-        left: 30
+        left: 0
     },
     mdswidth = 530,
     mdsheight = 530,
@@ -244,7 +244,7 @@ LDAvis = function(to_select, json_file) {
 
         // Create new svg element (that will contain everything):
         var svg = d3.select(to_select).append("svg")
-            .attr("width", mdswidth + barwidth + margin.left + termwidth + margin.right)
+            .attr("width", mdswidth + barwidth + margin.left + termwidth + margin.right - 30)
             .attr("height", mdsheight + 2 * margin.top + margin.bottom + 2 * rMax);
 
         // Create a group for the mds plot
@@ -594,12 +594,12 @@ LDAvis = function(to_select, json_file) {
             // create container div for topic and lambda input:
 	    var inputDiv = document.createElement("div");
 	    inputDiv.setAttribute("id", "top");
-	    inputDiv.setAttribute("style", "width: 1210px"); // to match the width of the main svg element
+	    inputDiv.setAttribute("style", "width: 100%; display: flex"); // to match the width of the main svg element
 	    document.getElementById(visID).appendChild(inputDiv);
 
 	    // topic input container:
 	    var topicDiv = document.createElement("div");
-	    topicDiv.setAttribute("style", "padding: 5px; background-color: #e8e8e8; display: inline-block; width: " + mdswidth + "px; height: 50px; float: left");
+	    topicDiv.setAttribute("style", "flex: 1; margin-right: 10px; background-color: #e8e8e8; display: inline-block; height: 50px;");
 	    inputDiv.appendChild(topicDiv);
 
             var topicLabel = document.createElement("label");
@@ -641,7 +641,7 @@ LDAvis = function(to_select, json_file) {
     	    var lambdaDivWidth = barwidth;
     	    var lambdaDiv = document.createElement("div");
     	    lambdaDiv.setAttribute("id", "lambdaInput");
-    	    lambdaDiv.setAttribute("style", "padding: 5px; background-color: #e8e8e8; display: inline-block; height: 50px; width: " + lambdaDivWidth + "px; float: right; margin-right: 30px");
+    	    lambdaDiv.setAttribute("style", "flex: 1; margin-left: 10px;  background-color: #e8e8e8; display: inline-block; height: 50px;");
     	    inputDiv.appendChild(lambdaDiv);
 
     	    var lambdaZero = document.createElement("div");
