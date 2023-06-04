@@ -114,7 +114,7 @@ Here is our report: [DV_milestone2.pdf](DV_milestone2.pdf)
 
 **80% of the final grade**
 
-Process book:   [link](DV_milestone2.pdf)
+Process book:   [link](DV_process_book.pdf)
 
 Website :       [link](https://com-480-data-visualization.github.io/project-2023-data-virtuosos)
 
