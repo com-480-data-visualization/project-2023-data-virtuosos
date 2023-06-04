@@ -101,11 +101,28 @@ document.addEventListener('click', function (e) {
 var margin = { top: 0, right: 0, bottom: 0, left: 0 },
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
-
+/** 
 var color = d3.scaleThreshold()
     .domain([2, 5, 10, 20, 50, 100, 500, 1000, 1500, 2000])
     //.domain([10000,100000,500000,1000000,5000000,10000000,50000000,100000000,500000000,1500000000])
     .range(["rgb(247,251,255)", "rgb(222,235,247)", "rgb(198,219,239)", "rgb(158,202,225)", "rgb(107,174,214)", "rgb(66,146,198)", "rgb(33,113,181)", "rgb(8,81,156)", "rgb(8,48,107)", "rgb(3,19,43)"]);
+*/
+var color = d3.scaleThreshold()
+    .domain([2, 5, 10, 20, 50, 100, 500, 1000, 1500, 2000])
+    .range([
+        "rgb(247,252,245)", 
+        "rgb(229,245,224)", 
+        "rgb(199,233,192)", 
+        "rgb(161,217,155)", 
+        "rgb(116,196,118)", 
+        "rgb(65,171,93)", 
+        "rgb(35,139,69)", 
+        "rgb(0,109,44)", 
+        "rgb(0,68,27)", 
+        "rgb(0,34,15)"
+    ]);
+
+
 
 var path = d3.geoPath();
 
